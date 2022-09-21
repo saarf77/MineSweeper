@@ -1,4 +1,4 @@
-var gLevel = { SIZE: 4, MINES: 2 };
+var gLevel = { SIZE: 4, MINES: 2 }
 var gGame = { isOn: true, shownCount: 0, markedCount: 0, secsPassed: 0 }
 var gBoard = []
 var gStartTime = 0
@@ -15,13 +15,28 @@ const FLAG = "🚩";
 const DIGITS = ["⬜️", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣"];
 
 
-function initGame() {
+function initGame(size = 4) {
+    gLevel.SIZE = size
+    switch (size) {
+        case 4:
+            gLevel.MINES = 2
+            break;
+        case 8:
+            gLevel.MINES = 14
+            break;
+        case 12:
+            gLevel.MINES = 32
+            break;
+        default:
+            break;
+    }
     buildBoard()
     renderBoard(gBoard, ".board")
-
 }
-function buildBoard() {
 
+function buildBoard() {
+    gBoard = []
+    gIsGame = false
     for (var i = 0; i < gLevel.SIZE; i++) {
         gBoard.push([])
         for (var j = 0; j < gLevel.SIZE; j++) {
@@ -40,9 +55,9 @@ function setMinesNegsCount(rowIdx, colIdx, randLocations) {
     var numNegs = 0
     // Neighbours loop - start
     for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
-        if (i < 0 || i >= gBoard.SIZE) continue
+        if (i < 0 || i >= gLevel.SIZE) continue
         for (var j = colIdx - 1; j <= colIdx + 1; j++) {
-            if (j < 0 || j >= gBoard.SIZE) continue
+            if (j < 0 || j >= gLevel.SIZE) continue
             if (i === rowIdx && j === colIdx) continue
             var currLocation = { row: i, col: j }
             if (inLocations(currLocation, randLocations)) {
@@ -63,7 +78,8 @@ function renderBoard(board,selector) {
         var currCell = board[i][j]
         var className = currCell ? 'occupied' : ''
         // strHTML += `<td class="${className}">${cell}</td>`
-        strHTML += `<td class="${className}" onclick="cellClicked(this,${i},${j})">${""}</td>`
+          strHTML += `<td class="${className}" onclick="cellClicked(this,${i},${j})" 
+        oncontextmenu="cellMarked(this,${i},${j}), event.preventDefault();">${""}</td>`
       }
       strHTML += `</tr>`
     }
@@ -96,26 +112,26 @@ function cellClicked(elCell, i, j) {
         elCell.innerText = DIGITS[cell.minesAroundCount]
         expandShown(elCell, i, j)
     }
-
-
-
-    if (!cell.isSeat || cell.isBooked) return
-    console.log('Cell clicked: ', elCell, i, j)
-
-    // Only a single seat should be selected
-    if (gElSelectedSeat) {
-        gElSelectedSeat.classList.remove('selected')
-    }
-    elCell.classList.add('selected')
-    gElSelectedSeat = elCell
-    // TODO: Support Unselecting a seat
-    showSeatDetails({ i: i, j: j })
 }
 
 
-function cellMarked(elCell) {
+function cellMarked(elCell, i, j) {
+    const cell = gBoard[i][j]
+    if (cell.isShown) {
+    return
+}
+else if (cell.isMarked) {
+        cell.isMarked = false
+        elCell.innerText = ''
+}
+else {
+    cell.isMarked = true
+    elCell.innerText = FLAG
+}
+gBoard[i][j] = cell
 
 }
+
 function checkGameOver() {
 
 }
@@ -185,3 +201,11 @@ function updateBoard(rowIdx, colIdx) {
     }
     console.table(gBoard);
 }
+
+
+
+function boardRestart() {
+    initGame(gLevel.SIZE)
+}
+
+

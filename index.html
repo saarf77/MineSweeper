@@ -5,20 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pacman</title>
+    <title>MinesSweeper</title>
     <link rel="stylesheet" href="css/app.css">
     <nav><h1>MinesSweeper</h1></nav>
 </head>
 
 <body onload="initGame()" >
     
-    
+    <div class="container">
+        <button class="glow-on-hover less" onclick="initGame()">Easy</button>
+        <button class="glow-on-hover less" onclick="initGame(8)">Hard</button>
+        <button class="glow-on-hover less" onclick="initGame(12)">Extreme</button>
+        <button class="glow-on-hover" onclick="boardRestart()">Restart</button>
 
+    </div>
+<!-- <button class="glow-on-hover" onclick="boardRestart()">Restart</button> -->
         <table border="1" cellpadding="10">
             <tbody class="board"></tbody>
         </table>
         <div>
-            <div class="game-data number"></div>
             <div><h2>Time:<span class="game-data timer">0</span></h2></div>
         </div>
 
