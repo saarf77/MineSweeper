@@ -1,0 +1,64 @@
+body {
+  background-color: black;
+  background-image: url(../img/pacman5.jpg);
+  background-size: cover;
+  background-position: -8cm;
+  color: white;
+  margin-left: 35%;
+}
+
+h1 {
+  color: #f07167;
+  font-size: 50px;
+  /* text-align: center; */
+}
+
+.board-container {
+  margin-top: 30px;
+  background-color: black;
+  margin-right: 550px;
+}
+
+.menu {
+  display: inline-flex;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.modal {
+  background-color: #f07167;
+  color: black;
+  position: absolute;
+  top: 50px;
+  padding: 20px;
+  width: 385px;
+  height: auto;
+  margin-top: 226px;
+}
+
+button {
+  color: black;
+  cursor: pointer;
+  padding: 8px 16px;
+  opacity: 0.9;
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: large;
+  transition-property: all;
+  transition-duration: 0.7s;
+}
+
+.modal button:hover {
+  color: #fdfcdc;
+  background-color: #00afb9;
+}
+
+img {
+  height: 30px;
+}
