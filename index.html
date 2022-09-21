@@ -6,26 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pacman</title>
-    <!-- <link rel="stylesheet" href="css/app.css"> -->
+    <link rel="stylesheet" href="css/app.css">
+    <nav><h1>MinesSweeper</h1></nav>
 </head>
 
 <body onload="initGame()" >
-    <h1>pacman</h1>
-    <div class="menu">
-        <h3>Superfood: 🍔 &nbsp;&nbsp;&nbsp; </h3>
-        <h3>10 Points: 🍒</h3>
-    </div>
+    
+    
 
-    <h2>Score: <span>0</span></h2>
-    <div class="board-container"></div>
-
-    <div class="modal">
-        <h2></h2>
-        <button onclick="onInit()">Restart</button>
-    </div>
+        <table border="1" cellpadding="10">
+            <tbody class="board"></tbody>
+        </table>
+        <div>
+            <div class="game-data number"></div>
+            <div><h2>Time:<span class="game-data timer">0</span></h2></div>
+        </div>
 
     <script src="js/utils.js"></script>
     <script src="js/mines.js"></script>
 </body>
-
+<footer>Made By Saar Fridman</footer>
 </html>

@@ -76,21 +76,21 @@ function renderBoard(board, selector) {
   }
   
   
-  function cellClicked(elCell, i, j) {
-    const cell = gCinema[i][j]
+  // function cellClicked(elCell, i, j) {
+  //   const cell = gCinema[i][j]
   
-    if (!cell.isSeat || cell.isBooked) return
-    console.log('Cell clicked: ', elCell, i, j)
+  //   if (!cell.isSeat || cell.isBooked) return
+  //   console.log('Cell clicked: ', elCell, i, j)
   
-    // Only a single seat should be selected
-    if (gElSelectedSeat) {
-        gElSelectedSeat.classList.remove('selected')
-    }
-    elCell.classList.add('selected')
-    gElSelectedSeat = elCell
-    // TODO: Support Unselecting a seat
-    showSeatDetails({ i: i, j: j })
-  }
+  //   // Only a single seat should be selected
+  //   if (gElSelectedSeat) {
+  //       gElSelectedSeat.classList.remove('selected')
+  //   }
+  //   elCell.classList.add('selected')
+  //   gElSelectedSeat = elCell
+  //   // TODO: Support Unselecting a seat
+  //   showSeatDetails({ i: i, j: j })
+  // }
   
   
   
@@ -261,4 +261,31 @@ function renderBoard(board, selector) {
         }
     }
     return emptySeatsCount
+}
+  
+
+
+
+/////
+
+function onCellClicked(cell) {
+  if (cell.innerText === '1') {
+    startGame()
   }
+  if (cell.classList.contains('clicked')) return
+
+  var currNum = +cell.innerText
+  if (currNum === gNextNum) {
+    gNextNum++
+    onRenderBoard(cell)
+    checkEnd()
+  } else wrongAnswer()
+}
+
+
+function renderTimer() {
+  gPlayTime = (Date.now() - gStartTime) / 1000
+  var strHTML = `${gPlayTime}`
+  var elTimer = document.querySelector('.timer')
+  elTimer.innerText = strHTML
+}
