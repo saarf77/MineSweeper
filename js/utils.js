@@ -110,7 +110,6 @@ function renderBoard(board, selector) {
   function startTimer() {
     gStartTime = Date.now()
     gTimeInterval = setInterval(updateTimer, 100)
-  
   }
   
   function updateTimer() {

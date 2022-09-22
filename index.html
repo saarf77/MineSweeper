@@ -7,28 +7,47 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MinesSweeper</title>
     <link rel="stylesheet" href="css/app.css">
-    <nav><h1>MinesSweeper</h1></nav>
+    <nav>
+        <h1>MinesSweeper💥</h1>
+    </nav>
 </head>
 
-<body onload="initGame()" >
-    
+<body onload="initGame()">
+
     <div class="container">
         <button class="glow-on-hover less" onclick="initGame()">Easy</button>
         <button class="glow-on-hover less" onclick="initGame(8)">Hard</button>
-        <button class="glow-on-hover less" onclick="initGame(12)">Extreme</button>
-        <button class="glow-on-hover" onclick="boardRestart()">Restart</button>
-
+        <button class="glow-on-hover less" onclick="initGame(12)">Expert</button>
     </div>
-<!-- <button class="glow-on-hover" onclick="boardRestart()">Restart</button> -->
-        <table border="1" cellpadding="10">
-            <tbody class="board"></tbody>
-        </table>
-        <div>
-            <div><h2>Time:<span class="game-data timer">0</span></h2></div>
-        </div>
 
+    <button class="glow-on-hover emoji" onclick="boardRestart()">😄</button>
+
+    <div>
+        <table id="love-table">
+            <tr>
+                <th id="love1">""</th>
+                <th id="love2">""</th>
+                <th id="love3">""</th>
+            </tr>
+        </table>
+    </div>
+    <!-- <button class="glow-on-hover" onclick="boardRestart()">Restart</button> -->
+    <table id="myTable" border="1" cellpadding="10">
+        <tbody class="board"></tbody>
+    </table>
+    <div>
+        <div>
+            <h3>Time:<span class="game-data timer">0</span></h3>
+        </div>
+    </div>
+
+
+    <div class="modal">
+        <h2></h2>
+    </div>
     <script src="js/utils.js"></script>
     <script src="js/mines.js"></script>
+    <footer class="cloud-text attribute">Made By Saar Fridman</footer>
 </body>
-<footer>Made By Saar Fridman</footer>
+
 </html>
