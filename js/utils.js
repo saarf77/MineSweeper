@@ -67,34 +67,6 @@ function renderBoard(board, selector) {
   }
   
   
-  function onCellClicked(elCell, cellI, cellJ) {
-    if (gBoard[cellI][cellJ] === LIFE) {
-      gBoard[cellI][cellJ] = SUPER_LIFE
-      elCell.innerText = gBoard[cellI][cellJ]
-      blowUpNegs(cellI, cellJ)
-    }
-  }
-  
-  
-  // function cellClicked(elCell, i, j) {
-  //   const cell = gCinema[i][j]
-  
-  //   if (!cell.isSeat || cell.isBooked) return
-  //   console.log('Cell clicked: ', elCell, i, j)
-  
-  //   // Only a single seat should be selected
-  //   if (gElSelectedSeat) {
-  //       gElSelectedSeat.classList.remove('selected')
-  //   }
-  //   elCell.classList.add('selected')
-  //   gElSelectedSeat = elCell
-  //   // TODO: Support Unselecting a seat
-  //   showSeatDetails({ i: i, j: j })
-  // }
-  
-  
-  
-  
   function createBoard() {
     var board = []
     for (let i = 0; i < 8; i++) {
@@ -114,25 +86,12 @@ function renderBoard(board, selector) {
   
   function updateTimer() {
     var diff = Date.now() - gStartTime
-    var inSeconds = (diff / 1000).toFixed(3)
+    var inSeconds = (diff / 1000).toFixed(1)
     document.querySelector('.timer').innerText = inSeconds
   }
   
   function stopTimer() {
     clearInterval(gTimeInterval)
-  }
-  
-  
-  
-  function cellClicked(elCell, num) {
-    console.log(elCell.dataset, num);
-    if (+elCell.dataset.num === gNextNum) {
-        if (gNextNum === 1) startTimer()
-        elCell.classList.add('clicked')
-        gNextNum++
-        if (gNextNum >= gSize) stopTimer()
-        renderNextNum()
-    }
   }
   
   
@@ -146,30 +105,6 @@ function renderBoard(board, selector) {
   }
   
   
-  
-  
-  function countNegs(rowIdx, colIdx, board) {
-    var numNegs = 0
-    // Neighbours loop - start
-    for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
-      if (i < 0 || i >= board.length) continue
-      for (var j = colIdx - 1; j <= colIdx + 1; j++) {
-        if (j < 0 || j >= board[i].length) continue
-        if (i === rowIdx && j === colIdx) continue
-        // if (mat[i][j] === LIFE || mat[i][j] === SUPER_LIFE) negsCount++;
-        // The above line wil be used in cases there are elements that occupy a cell but we don't consider them negs
-        if (board[i][j]) {
-          numNegs++
-        }
-      }
-    }
-    //Neighbours loop - end
-  
-    return numNegs
-  }
-  
-  
-  
   function onToggleGame(elBtn) {
     if (gGameInterval) {
       clearInterval(gGameInterval)
@@ -180,9 +115,6 @@ function renderBoard(board, selector) {
       elBtn.innerText = 'Pause'
     }
   }
-  
-  
-  
   
   function buildBoard() {
     const size = 10
@@ -262,7 +194,25 @@ function renderBoard(board, selector) {
     return emptySeatsCount
 }
   
+function countNegs(rowIdx, colIdx, board) {
+  var numNegs = 0
+  // Neighbours loop - start
+  for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
+    if (i < 0 || i >= board.length) continue
+    for (var j = colIdx - 1; j <= colIdx + 1; j++) {
+      if (j < 0 || j >= board[i].length) continue
+      if (i === rowIdx && j === colIdx) continue
+      // if (mat[i][j] === LIFE || mat[i][j] === SUPER_LIFE) negsCount++;
+      // The above line wil be used in cases there are elements that occupy a cell but we don't consider them negs
+      if (board[i][j]) {
+        numNegs++
+      }
+    }
+  }
+  //Neighbours loop - end
 
+  return numNegs
+}
 
 
 /////
@@ -282,9 +232,38 @@ function onCellClicked(cell) {
 }
 
 
-function renderTimer() {
-  gPlayTime = (Date.now() - gStartTime) / 1000
-  var strHTML = `${gPlayTime}`
-  var elTimer = document.querySelector('.timer')
-  elTimer.innerText = strHTML
+function onCellClicked(elCell, cellI, cellJ) {
+  if (gBoard[cellI][cellJ] === LIFE) {
+    gBoard[cellI][cellJ] = SUPER_LIFE
+    elCell.innerText = gBoard[cellI][cellJ]
+    blowUpNegs(cellI, cellJ)
+  }
 }
+
+
+function cellClicked(elCell, num) {
+  console.log(elCell.dataset, num);
+  if (+elCell.dataset.num === gNextNum) {
+      if (gNextNum === 1) startTimer()
+      elCell.classList.add('clicked')
+      gNextNum++
+      if (gNextNum >= gSize) stopTimer()
+      renderNextNum()
+  }
+}
+
+  // function cellClicked(elCell, i, j) {
+  //   const cell = gCinema[i][j]
+  
+  //   if (!cell.isSeat || cell.isBooked) return
+  //   console.log('Cell clicked: ', elCell, i, j)
+  
+  //   // Only a single seat should be selected
+  //   if (gElSelectedSeat) {
+  //       gElSelectedSeat.classList.remove('selected')
+  //   }
+  //   elCell.classList.add('selected')
+  //   gElSelectedSeat = elCell
+  //   // TODO: Support Unselecting a seat
+  //   showSeatDetails({ i: i, j: j })
+  // }

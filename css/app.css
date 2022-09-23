@@ -1,11 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+/* nav */
+nav {
+  height: 15px;
+  flex: 100%;
+  display: flex;
+  font-size: 30px;
+  margin-left: 30px;
+  align-items: baseline;
+}
+
+nav ul {
+  padding: 0;
+  list-style-type: none;
+  flex: 2;
+  display: flex;
+  margin-left: 30px;
+  margin: 0;
+}
+
+a {
+  color: #ffd166;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: inherit;
+  color: #2ec4b6;
+}
+
+/* body */
 body {
   text-align: center;
   background-image: url(../img/3.jpg);
   background-position: center;
   background-size: cover;
   color: lightgray;
-  background-attachment: fixed;  
-  }
+  background-attachment: fixed;
+}
 
 /* h1  {
   z-index: 1;
@@ -21,28 +55,27 @@ letter-spacing: 10px;
 -webkit-text-stroke-width: 1px;
  -webkit-text-stroke-color: black;
 } */
-h1{
-  font-size: 3.3rem;
-  margin-top: 20px;
+h1 {
+  font-size: 4rem;
+  margin-top: 10px;
   text-align: center;
-  height:2vh;
+  height: 2vh;
   line-height: 2vh;
   color: #fcedd8;
   font-family: 'Niconne', cursive;
   font-weight: 700;
-  text-shadow: 5px 5px 0px #eb452b, 
-              10px 10px 0px #efa032, 
-              15px 15px 0px #46b59b, 
-              20px 20px 0px #017e7f, 
-              25px 25px 0px #052939, 
-              30px 30px 0px #c11a2b, 
-              35px 35px 0px #c11a2b, 
-              40px 40px 0px #c11a2b, 
-              45px 45px 0px #c11a2b;
+  text-shadow: 5px 5px 0px #eb452b,
+    10px 10px 0px #efa032,
+    15px 15px 0px #46b59b,
+    20px 20px 0px #017e7f,
+    25px 25px 0px #052939,
+    30px 30px 0px #c11a2b,
+    35px 35px 0px #c11a2b,
+    40px 40px 0px #c11a2b,
+    45px 45px 0px #c11a2b;
 }
 
-
-
+/* table */
 table {
   margin: auto;
 }
@@ -67,12 +100,13 @@ table {
   opacity: 0.7;
 }
 
+/* buttons */
 button {
   width: auto;
   margin: 5px;
   font-size: 1.5rem;
   border-radius: 25px;
-  background: #8AACC6ff;
+  /* background: #8AACC6ff; */
 }
 
 .glow-on-hover {
@@ -137,7 +171,6 @@ button {
   position: absolute;
   width: 100%;
   height: 100%;
-  /* background: #111; */
   background: lightgray;
   opacity: 0.9;
   left: 0;
@@ -159,7 +192,6 @@ button {
   }
 }
 
-
 /* footer {
   color: #111;
   padding: 20px;
@@ -171,48 +203,71 @@ button {
   height: 1.5rem; 
 } */
 
-/* .timer{
-background-color: #000;
-} */
-/* 
-.btn {
-  width: 50px;
-  margin: 5px;
-  font-size: 2rem;
-  border-radius: 25px;
-  background:#8AACC6ff;
-} */
-
+/* footer */
 .cloud-text {
-	font-family: 'Coiny', cursive;
-	-webkit-background-clip: text;
-  	-webkit-text-fill-color: transparent;	
-	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/769286/clouds.jpg);
-	background-size: auto;
-	background-attachment: unset;
-	background-position: 0%;
-	width: 80%;
-	margin: 10%;
-	font-size: 134px;
-	animation: clouds-moving infinite 220s;
-	animation-fill-mode: forwards;
-	animation-play-state: running;
-	animation-timing-function: linear;
-	text-align: center;
+  font-family: 'Coiny', cursive;
+  background-clip: text;
+  width: 80%;
+  margin: 10%;
+  font-size: 134px;
+  animation: clouds-moving infinite 220s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-timing-function: linear;
+  text-align: center;
 }
+
 @keyframes clouds-moving {
-	0% {
-		background-position: 0%;	
-	}
-	50% {
-		background-position: 100%;	
-	}
-	100% {
-		background-position: 0%;
-	}
+  0% {
+    background-position: 0%;
+  }
+
+  50% {
+    background-position: 100%;
+  }
+
+  100% {
+    background-position: 0%;
+  }
 }
+
 .attribute {
-	position: relative;
-	font-size: 26px;
-	text-align: center;
+  position: relative;
+  font-size: 26px;
+  text-align: center;
+}
+
+
+
+
+/* dark mode */
+.dark-mode {
+  background-color: black;
+  color: brown;
+  background-image: none;
+}
+
+
+.dark-mode .board td:hover {
+  background-color: black;
+  opacity: 0.7;
+}
+
+.dark-mode .occupied {
+  background-color: brown;
+  opacity: 0.7;
+}
+
+
+.dark-mode .glow-on-hover {
+  width: 160px;
+  height: 34px;
+  border: none;
+  outline: none;
+  color: black;
+  background: darkgoldenrod;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
 }

@@ -7,12 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MinesSweeper</title>
     <link rel="stylesheet" href="css/app.css">
-    <nav>
-        <h1>MinesSweeper💥</h1>
-    </nav>
 </head>
 
-<body onload="initGame()">
+<body class="dark-mode" onload="initGame()">
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            </li>
+        </ul>
+    </nav>
+    <h1>MinesSweeper💥</h1>
 
     <div class="container">
         <button class="glow-on-hover less" onclick="initGame()">Easy</button>
@@ -21,6 +25,7 @@
     </div>
 
     <button class="glow-on-hover emoji" onclick="boardRestart()">😄</button>
+    <button class="glow-on-hover " onclick="darkMode()">🌗 Mode</button>
 
     <div>
         <table id="love-table">
@@ -31,7 +36,6 @@
             </tr>
         </table>
     </div>
-    <!-- <button class="glow-on-hover" onclick="boardRestart()">Restart</button> -->
     <table id="myTable" border="1" cellpadding="10">
         <tbody class="board"></tbody>
     </table>
@@ -45,9 +49,9 @@
     <div class="modal">
         <h2></h2>
     </div>
+    <footer class="cloud-text attribute">Made By Saar Fridman</footer>
     <script src="js/utils.js"></script>
     <script src="js/mines.js"></script>
-    <footer class="cloud-text attribute">Made By Saar Fridman</footer>
 </body>
 
 </html>

@@ -1,115 +1,149 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
-
+/* body */
 body {
-    background: yellow;
-    font-family: 'Raleway', sans-serif;
+  background: lightseagreen;
+  font-family: 'Raleway', sans-serif;
 }
 
 span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 120px;
-    letter-spacing: 0.1em;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke-width: 3px;
-    -webkit-text-stroke-color: white;
-    text-shadow:
-        8px 8px #ff1f8f,
-        20px 20px #000000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 120px;
+  letter-spacing: 0.1em;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: white;
+  text-shadow:
+    8px 8px #ff1f8f,
+    20px 20px #000000;
+}
+/* buttons */
+button a {
+  margin: 5px;
+  font-size: 3rem;
+  border-radius: 25px;
+  text-decoration: none;
+  color: white;
+}
+
+.glow-on-hover {
+  width: 300px;
+  height: 40;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: #000
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* background: #111; */
+  background: lightgray;
+  opacity: 0.4;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+.less.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* background: #111; */
+  background: lightgray;
+  opacity: 0.9;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
 }
 
 
-button a{
-    margin: 5px;
-    font-size: 3rem;
-    border-radius: 25px;
-    text-decoration: none;
-    color: white;
+/* footer */
+.cloud-text {
+  font-family: 'Coiny', cursive;
+  -webkit-text-fill-color:inherit;
+  width: 30%;
+  margin: 10%;
+  font-size: 134px;
+  animation: clouds-moving infinite 220s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-timing-function: linear;
+  text-align: center;
+margin: auto;
+}
+
+@keyframes clouds-moving {
+  0% {
+    background-position: 0%;
   }
-  
-  .glow-on-hover {
-    width: 300px;
-    height: 40;
-    border: none;
-    outline: none;
-    color: #fff;
-    background: #111;
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
-    border-radius: 10px;
+
+  50% {
+    background-position: 100%;
   }
-  
-  .glow-on-hover:before {
-    content: '';
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(5px);
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    animation: glowing 20s linear infinite;
-    opacity: 0;
-    transition: opacity .3s ease-in-out;
-    border-radius: 10px;
+
+  100% {
+    background-position: 0%;
   }
-  
-  .glow-on-hover:active {
-    color: #000
-  }
-  
-  .glow-on-hover:active:after {
-    background: transparent;
-  }
-  
-  .glow-on-hover:hover:before {
-    opacity: 1;
-  }
-  
-  .glow-on-hover:after {
-    z-index: -1;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    /* background: #111; */
-    background: lightgray;
-    opacity: 0.4;
-    left: 0;
-    top: 0;
-    border-radius: 10px;
-  }
-  
-  .less.glow-on-hover:after {
-    z-index: -1;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    /* background: #111; */
-    background: lightgray;
-    opacity: 0.9;
-    left: 0;
-    top: 0;
-    border-radius: 10px;
-  }
-  
-  @keyframes glowing {
-    0% {
-      background-position: 0 0;
-    }
-  
-    50% {
-      background-position: 400% 0;
-    }
-  
-    100% {
-      background-position: 0 0;
-    }
-  }
-  
+}
+
+.attribute {
+  position: relative;
+  font-size: 26px;
+  text-align: center;
+}

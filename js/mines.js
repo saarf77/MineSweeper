@@ -1,13 +1,15 @@
+'use strict'
+
 var gLevel = { SIZE: 4, MINES: 2 }
 var gGame = { isOn: true, shownCount: 0, markedCount: 0, secsPassed: 0 }
 var gBoard = []
 var gStartTime = 0
-gTimeInterval = 0
+var gTimeInterval = 0
 var gLoveCount = 3
 var gIsGame = false
-gClickedCount = 0
-gCellsToClick = 0
-gGameIsOn = true
+var gClickedCount = 0
+var gCellsToClick = 0
+var gGameIsOn = true
 
 const WIN = '😎'
 const NORMAL = "😄"
@@ -19,7 +21,7 @@ const FLAG = "🚩"
 const HEART = '❤️'
 const DIGITS = ["⬜️", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣"]
 
-
+// This is called when page loads
 function initGame(size = 4) {
     normalEmoji()
     stopTimer()
@@ -39,9 +41,9 @@ function initGame(size = 4) {
     }
     buildBoard()
     renderBoard(gBoard, ".board")
-
 }
 
+// Builds the board and reset the lives
 function buildBoard() {
     heartRestart()
     gBoard = []
@@ -61,8 +63,7 @@ function buildBoard() {
     // return gBoard
 }
 
-
-
+// Count mines around each cell 
 function setMinesNegsCount(rowIdx, colIdx, randLocations) {
     var numNegs = 0
     // Neighbours loop - start
@@ -81,7 +82,7 @@ function setMinesNegsCount(rowIdx, colIdx, randLocations) {
     return numNegs
 }
 
-
+// Render the board as a <table> to the page
 function renderBoard(board, selector) {
     var strHTML = ``
     for (let i = 0; i < board.length; i++) {
@@ -99,8 +100,7 @@ function renderBoard(board, selector) {
     elBoard.innerHTML = strHTML
 }
 
-
-
+// Called when a cell (td) is clicked
 function cellClicked(elCell, i, j) {
     if (!gGameIsOn) {
         return
@@ -112,8 +112,8 @@ function cellClicked(elCell, i, j) {
     }
     const cell = gBoard[i][j]
     if (cell.isMarked || cell.isShown) {
-       return
-   }
+        return
+    }
     else if (cell.isMine && !cell.isMarked) {
         loseLife()
         elCell.innerText = MINE
@@ -136,12 +136,12 @@ function cellClicked(elCell, i, j) {
             expandShown(elCell, i, j)
         }
         if (gClickedCount === gCellsToClick) {
-            isVictory(true) 
+            isVictory(true)
         }
     }
 }
 
-
+// Called on right click to mark a cell (suspected to be a mine) 
 function cellMarked(elCell, i, j) {
     const cell = gBoard[i][j]
     if (!gGameIsOn) {
@@ -162,22 +162,10 @@ function cellMarked(elCell, i, j) {
 
 }
 
-function checkGameOver() {
-    if (gLoveCount === 0)
-        gGame.isOn = false
-    stopTimer()
-    // updateBoard()
-    //     renderBoard()
-    // isShown = true
-    // elCell.innerText = MINE
-
-    // return alert('YOU LOST')
-    // var elLost = document.querySelector("")
-    // return elLost.innerText = LOST
-}
-
-
+// Game ends when all mines are marked, or when all the other cells shown, return and show a win/lose message
 function isVictory(state) {
+    var ellEmoji = document.querySelector('.emoji')
+        ellEmoji.innerText = WIN
     stopTimer()
     for (var i = 0; i < gLevel.SIZE; i++) {
         for (var j = 0; j < gLevel.SIZE; j++) {
@@ -191,17 +179,17 @@ function isVictory(state) {
     var randColor = getRandomColor()
     elModalBless.style.color = `${randColor}`
     if (state) {
-        elModalBless.innerText = `WOW! You Win! You Are The Best!`   
+        elModalBless.innerText = `WOW! You Win! You Are The Best!`
     }
     else {
         elModalBless.innerText = `You Lost:( `
     }
     openModal()
     gGameIsOn = false
-    return 
+    return
 }
 
-
+// When user clicks a cell with no mines around, we need to open not only that cell, but also its neighbors.  
 function expandShown(elCell, rowIdx, colIdx) {
     for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
         if (i < 0 || i >= gLevel.SIZE) continue
@@ -221,6 +209,7 @@ function expandShown(elCell, rowIdx, colIdx) {
     }
 }
 
+// allocate mines in random location
 function randMinesLocation(rowIdx, colIdx) {
     var randLocations = []
     var locationSize = 0
@@ -229,7 +218,7 @@ function randMinesLocation(rowIdx, colIdx) {
         var currRow = getRandomInt(0, gLevel.SIZE)
         var currCol = getRandomInt(0, gLevel.SIZE)
         var currLocation = { row: currRow, col: currCol }
-        if (!randLocations.includes(currLocation) && currRow != rowIdx && currCol != colIdx) {
+        if (!inLocations(currLocation, randLocations) && currRow != rowIdx && currCol != colIdx) {
             randLocations.push(currLocation)
             locationSize++
         }
@@ -237,8 +226,7 @@ function randMinesLocation(rowIdx, colIdx) {
     return randLocations
 }
 
-
-
+// called in randMinesLocation, updateBoard, randMinesLocation and setMinesNegsCount checks 
 function inLocations(currLocation, randLocations) {
     for (var i = 0; i < randLocations.length; i++) {
         if (currLocation.row === randLocations[i].row && currLocation.col === randLocations[i].col) {
@@ -248,22 +236,7 @@ function inLocations(currLocation, randLocations) {
     return false
 }
 
-function startTimer() {
-    gStartTime = Date.now()
-    gTimeInterval = setInterval(updateTimer, 100)
-}
-
-
-function updateTimer() {
-    var diff = Date.now() - gStartTime
-    var inSeconds = (diff / 1000).toFixed(1)
-    document.querySelector('.timer').innerText = inSeconds
-}
-
-function stopTimer() {
-    clearInterval(gTimeInterval)
-}
-
+// called in cellClicked, update the board after 1st click that is not a MINE
 function updateBoard(rowIdx, colIdx) {
     var randLocations = randMinesLocation(rowIdx, colIdx)
 
@@ -284,13 +257,12 @@ function updateBoard(rowIdx, colIdx) {
     console.table(gBoard);
 }
 
-
-
+// called when clicked on the emoji button, restarts the board
 function boardRestart() {
     initGame(gLevel.SIZE)
 }
 
-
+// called in buildBoard, restart the lives to 3.
 function heartRestart() {
     gLoveCount = 3
     var currElemCellRow = document.getElementById("love-table").rows[0]
@@ -299,33 +271,46 @@ function heartRestart() {
     }
 }
 
+// called when clicked on a mine, decrease lives
 function loseLife() {
     gLoveCount--
     var currElemCell = document.getElementById("love-table").rows[0].cells[gLoveCount]
     currElemCell.innerText = ""
-
 }
 
+// called in initGame, so the emoji will return to normal
 function normalEmoji() {
     var ellEmoji = document.querySelector('.emoji')
     ellEmoji.innerText = NORMAL
 }
 
-
-function bless() {
-    var elModalBless = document.querySelector('.modal h2')
-    var randColor = getRandomColor()
-    elModalBless.style.color = `${randColor}`
-    elModalBless.innerText = `WOW! You Win! You Are The Best!`
-    openModal()
-}
-
-
+// show the win/lose message for 5 seconds
 function openModal() {
-    // Todo: show the modal and schedule its closing
     var elModal = document.querySelector('.modal')
     elModal.style.display = 'block'
     setTimeout(() => {
         elModal.style.display = 'none'
     }, 5000)
 }
+
+// start timer, update it and stop timer
+function startTimer() {
+    gStartTime = Date.now()
+    gTimeInterval = setInterval(updateTimer, 100)
+}
+
+function updateTimer() {
+    var diff = Date.now() - gStartTime
+    var inSeconds = (diff / 1000).toFixed(1)
+    document.querySelector('.timer').innerText = inSeconds
+}
+
+function stopTimer() {
+    clearInterval(gTimeInterval)
+}
+
+// implement dark and light mode
+function darkMode() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+  }
