@@ -1,4 +1,4 @@
-* {
+*.light-mode {
   box-sizing: border-box;
 }
 
@@ -241,7 +241,7 @@ button {
 
 
 /* dark mode */
-.dark-mode {
+.dark-mode{
   background-color: black;
   color: brown;
   background-image: none;
