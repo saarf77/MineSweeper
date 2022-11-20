@@ -251,19 +251,3 @@ function cellClicked(elCell, num) {
       renderNextNum()
   }
 }
-
-  // function cellClicked(elCell, i, j) {
-  //   const cell = gCinema[i][j]
-  
-  //   if (!cell.isSeat || cell.isBooked) return
-  //   console.log('Cell clicked: ', elCell, i, j)
-  
-  //   // Only a single seat should be selected
-  //   if (gElSelectedSeat) {
-  //       gElSelectedSeat.classList.remove('selected')
-  //   }
-  //   elCell.classList.add('selected')
-  //   gElSelectedSeat = elCell
-  //   // TODO: Support Unselecting a seat
-  //   showSeatDetails({ i: i, j: j })
-  // }
