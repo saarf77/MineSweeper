@@ -28,7 +28,7 @@ function initGame(size = 4) {
     gLevel.SIZE = size
     switch (size) {
         case 4:
-            gLevel.MINES = 3
+            gLevel.MINES = 2
             break;
         case 8:
             gLevel.MINES = 14
@@ -164,7 +164,8 @@ function cellMarked(elCell, i, j) {
 
 // Game ends when all mines are marked, or when all the other cells shown, return and show a win/lose message
 function isVictory(state) {
-
+    var ellEmoji = document.querySelector('.emoji')
+        ellEmoji.innerText = WIN
     stopTimer()
     for (var i = 0; i < gLevel.SIZE; i++) {
         for (var j = 0; j < gLevel.SIZE; j++) {
@@ -178,8 +179,6 @@ function isVictory(state) {
     var randColor = getRandomColor()
     elModalBless.style.color = `${randColor}`
     if (state) {
-        var ellEmoji = document.querySelector('.emoji')
-        ellEmoji.innerText = WIN
         elModalBless.innerText = `WOW! You Win! You Are The Best!`
     }
     else {

@@ -21,6 +21,7 @@ span {
 }
 /* buttons */
 button a {
+  width: 100%;
   margin: 5px;
   font-size: 3rem;
   border-radius: 25px;
