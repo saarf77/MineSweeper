@@ -149,32 +149,3 @@ margin: auto;
   text-align: center;
 }
 
-@media (max-width: 749px) {
-.home{
-  margin-top: 20px;
-}
-  button{
-    margin-top: 20px;
-display: flex;
-justify-content: center;
-align-items: center;
-margin: auto;
-width: 50%;
-border: 3px solid green;
-padding: 8px;
-}
-  span{
-    font-size: 4em;
-    margin-top: 1em;
-    margin-bottom: 1.8em;
-    top: 42%;
-  }
-  button a {
-    margin: 10px;
-    font-size: 3em;
-  }
-  .cloud-text{
-    width: 100%;
-    margin-top: 20px;
-  }
-}
