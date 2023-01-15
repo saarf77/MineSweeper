@@ -1,6 +1,6 @@
 *.light-mode {
   box-sizing: border-box;
-    font-family: 'Niconne', cursive;
+    /* font-family: 'Niconne', cursive; */
 
 }
 
@@ -50,7 +50,7 @@ h1 {
   height: 2vh;
   line-height: 2vh;
   color: #fcedd8;
-  font-family: 'Niconne', cursive;
+  /* font-family: 'Niconne', cursive; */
   font-weight: 700;
   text-shadow: 5px 5px 0px #eb452b,
     10px 10px 0px #efa032,
@@ -183,7 +183,7 @@ button {
 
 /* footer */
 .cloud-text {
-  font-family: 'Coiny', cursive;
+  /* font-family: 'Coiny', cursive; */
   background-clip: text;
   width: 80%;
   margin: 10%;
