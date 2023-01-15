@@ -1,6 +1,6 @@
 *.light-mode {
   box-sizing: border-box;
-    /* font-family: 'Niconne', cursive; */
+    font-family: 'Niconne', cursive;
 
 }
 
@@ -183,7 +183,7 @@ button {
 
 /* footer */
 .cloud-text {
-  /* font-family: 'Coiny', cursive; */
+  font-family: 'Coiny', cursive;
   background-clip: text;
   width: 80%;
   margin: 10%;
